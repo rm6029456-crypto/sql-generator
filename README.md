@@ -125,11 +125,9 @@ The application will be available at `http://localhost:3000`
 4. Optionally save or export the results
 
 ## Example Output
-
 Here is a screenshot of the SQL Generator in action:
 
 ![SQL Generator Output](assets/output.png)
-
 ## Contributing
 
 1. Fork the repository
@@ -143,3 +141,4 @@ Here is a screenshot of the SQL Generator in action:
 - Built with ❤️ using FastAPI and React
 - Inspired by the need for more accessible database querying tools
 - Special thanks to all contributors who have helped improve this project
+
