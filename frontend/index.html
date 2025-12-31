@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NLP Dashboard Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        input {
+            width: 400px;
+            padding: 8px;
+            font-size: 14px;
+        }
+        button {
+            padding: 8px 16px;
+            margin-left: 8px;
+            font-size: 14px;
+        }
+        pre {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f4f4f4;
+            border-radius: 5px;
+            max-width: 800px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h2>NLP Dashboard Demo</h2>
+<p>Type a question in plain English and see the result.</p>
+
+<input
+    type="text"
+    id="queryInput"
+    placeholder="e.g. How many females are there"
+/>
+
+<button onclick="sendQuery()">Submit</button>
+
+<pre id="result">Waiting for query...</pre>
+
+<script>
+async function sendQuery() {
+    const queryText = document.getElementById("queryInput").value;
+
+    if (!queryText) {
+        alert("Please enter a query");
+        return;
+    }
+
+    document.getElementById("result").textContent = "Processing...";
+
+    try {
+        const response = await fetch("http://127.0.0.1:8000/query", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ query: queryText })
+        });
+
+        const data = await response.json();
+
+        document.getElementById("result").textContent =
+            JSON.stringify(data, null, 2);
+
+    } catch (error) {
+        document.getElementById("result").textContent =
+            "Error connecting to backend";
+    }
+}
+</script>
+
+</body>
+</html>
